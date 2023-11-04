@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GYM3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CATEGORIA">
+    <Key>
+      <PropertyRef Name="IDCategoria" />
+    </Key>
+    <Property Name="IDCategoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreCategoria" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="Descripcion" Type="ntext" />
+  </EntityType>
+  <EntityType Name="DETALLEORDEN">
+    <Key>
+      <PropertyRef Name="IDOrden" />
+      <PropertyRef Name="IDProducto" />
+    </Key>
+    <Property Name="IDOrden" Type="int" Nullable="false" />
+    <Property Name="IDProducto" Type="int" Nullable="false" />
+    <Property Name="MetodoEnvio" Type="nvarchar" MaxLength="20" />
+    <Property Name="PrecioUnidad" Type="money" Nullable="false" />
+    <Property Name="Cantidad" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ORDENES">
+    <Key>
+      <PropertyRef Name="IDOrden" />
+    </Key>
+    <Property Name="IDOrden" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDUsuario" Type="nchar" MaxLength="10" />
+    <Property Name="DiaOrden" Type="datetime" />
+    <Property Name="FechaEntrega" Type="datetime" />
+    <Property Name="DireccionEnvio" Type="nvarchar" MaxLength="60" />
+    <Property Name="CiudadEnvio" Type="nvarchar" MaxLength="15" />
+    <Property Name="CantonEnvio" Type="nvarchar" MaxLength="15" />
+    <Property Name="EnvioCodPostal" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="PRODUCTOS">
+    <Key>
+      <PropertyRef Name="IDProducto" />
+    </Key>
+    <Property Name="IDProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreProducto" Type="nvarchar" MaxLength="40" Nullable="false" />
+    <Property Name="IDProveedor" Type="int" />
+    <Property Name="IDCategoria" Type="int" />
+    <Property Name="CantidadPorUnidad" Type="nvarchar" MaxLength="20" />
+    <Property Name="Precio" Type="money" Nullable="false" />
+    <Property Name="UnidadesEnStock" Type="smallint" />
+    <Property Name="UnidadesEnOrden" Type="smallint" />
+    <Property Name="Estado" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="PROVEEDORES">
+    <Key>
+      <PropertyRef Name="IDProveedor" />
+    </Key>
+    <Property Name="IDProveedor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="40" Nullable="false" />
+    <Property Name="NombreContacto" Type="nvarchar" MaxLength="30" />
+    <Property Name="Direccion" Type="nvarchar" MaxLength="60" />
+    <Property Name="Ciudad" Type="nvarchar" MaxLength="15" />
+    <Property Name="Canton" Type="nvarchar" MaxLength="15" />
+    <Property Name="CodigoPostal" Type="nvarchar" MaxLength="10" />
+    <Property Name="Pais" Type="nvarchar" MaxLength="15" />
+    <Property Name="Telefono" Type="nvarchar" MaxLength="24" />
+    <Property Name="PaginaWeb" Type="ntext" />
+  </EntityType>
+  <EntityType Name="USUARIO">
+    <Key>
+      <PropertyRef Name="IDUsuario" />
+    </Key>
+    <Property Name="IDUsuario" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Apellido" Type="nvarchar" MaxLength="30" />
+    <Property Name="Direccion" Type="nvarchar" MaxLength="60" />
+    <Property Name="Ciudad" Type="nvarchar" MaxLength="15" />
+    <Property Name="Canton" Type="nvarchar" MaxLength="15" />
+    <Property Name="CodigoPostal" Type="nvarchar" MaxLength="10" />
+    <Property Name="Pais" Type="nvarchar" MaxLength="15" />
+    <Property Name="Telefono" Type="nvarchar" MaxLength="24" />
+    <Property Name="Tipo" Type="nvarchar" MaxLength="24" />
+    <Property Name="UltimaConexion" Type="datetime" />
+  </EntityType>
+  <Association Name="FK_Ordenes_Usuario">
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+    <End Role="ORDENES" Type="Self.ORDENES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="IDUsuario" />
+      </Principal>
+      <Dependent Role="ORDENES">
+        <PropertyRef Name="IDUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Details_Ordenes">
+    <End Role="ORDENES" Type="Self.ORDENES" Multiplicity="1" />
+    <End Role="DETALLEORDEN" Type="Self.DETALLEORDEN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORDENES">
+        <PropertyRef Name="IDOrden" />
+      </Principal>
+      <Dependent Role="DETALLEORDEN">
+        <PropertyRef Name="IDOrden" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Details_Productos">
+    <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="1" />
+    <End Role="DETALLEORDEN" Type="Self.DETALLEORDEN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTOS">
+        <PropertyRef Name="IDProducto" />
+      </Principal>
+      <Dependent Role="DETALLEORDEN">
+        <PropertyRef Name="IDProducto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Productos_Categorias">
+    <End Role="CATEGORIA" Type="Self.CATEGORIA" Multiplicity="0..1" />
+    <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CATEGORIA">
+        <PropertyRef Name="IDCategoria" />
+      </Principal>
+      <Dependent Role="PRODUCTOS">
+        <PropertyRef Name="IDCategoria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Productos_Proveedores">
+    <End Role="PROVEEDORES" Type="Self.PROVEEDORES" Multiplicity="0..1" />
+    <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROVEEDORES">
+        <PropertyRef Name="IDProveedor" />
+      </Principal>
+      <Dependent Role="PRODUCTOS">
+        <PropertyRef Name="IDProveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GYM3ModelStoreContainer">
+    <EntitySet Name="CATEGORIA" EntityType="Self.CATEGORIA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DETALLEORDEN" EntityType="Self.DETALLEORDEN" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ORDENES" EntityType="Self.ORDENES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PRODUCTOS" EntityType="Self.PRODUCTOS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PROVEEDORES" EntityType="Self.PROVEEDORES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Ordenes_Usuario" Association="Self.FK_Ordenes_Usuario">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="ORDENES" EntitySet="ORDENES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Details_Ordenes" Association="Self.FK_Order_Details_Ordenes">
+      <End Role="ORDENES" EntitySet="ORDENES" />
+      <End Role="DETALLEORDEN" EntitySet="DETALLEORDEN" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Details_Productos" Association="Self.FK_Order_Details_Productos">
+      <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+      <End Role="DETALLEORDEN" EntitySet="DETALLEORDEN" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Productos_Categorias" Association="Self.FK_Productos_Categorias">
+      <End Role="CATEGORIA" EntitySet="CATEGORIA" />
+      <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Productos_Proveedores" Association="Self.FK_Productos_Proveedores">
+      <End Role="PROVEEDORES" EntitySet="PROVEEDORES" />
+      <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

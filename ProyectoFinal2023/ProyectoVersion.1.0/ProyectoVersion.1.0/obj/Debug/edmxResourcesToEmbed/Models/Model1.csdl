@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GYM3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CATEGORIA">
+    <Key>
+      <PropertyRef Name="IDCategoria" />
+    </Key>
+    <Property Name="IDCategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreCategoria" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="PRODUCTOS" Relationship="Self.FK_Productos_Categorias" FromRole="CATEGORIA" ToRole="PRODUCTOS" />
+  </EntityType>
+  <EntityType Name="DETALLEORDEN">
+    <Key>
+      <PropertyRef Name="IDOrden" />
+      <PropertyRef Name="IDProducto" />
+    </Key>
+    <Property Name="IDOrden" Type="Int32" Nullable="false" />
+    <Property Name="IDProducto" Type="Int32" Nullable="false" />
+    <Property Name="MetodoEnvio" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="PrecioUnidad" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Cantidad" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="ORDENES" Relationship="Self.FK_Order_Details_Ordenes" FromRole="DETALLEORDEN" ToRole="ORDENES" />
+    <NavigationProperty Name="PRODUCTOS" Relationship="Self.FK_Order_Details_Productos" FromRole="DETALLEORDEN" ToRole="PRODUCTOS" />
+  </EntityType>
+  <EntityType Name="ORDENES">
+    <Key>
+      <PropertyRef Name="IDOrden" />
+    </Key>
+    <Property Name="IDOrden" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDUsuario" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="DiaOrden" Type="DateTime" Precision="3" />
+    <Property Name="FechaEntrega" Type="DateTime" Precision="3" />
+    <Property Name="DireccionEnvio" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="CiudadEnvio" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="CantonEnvio" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="EnvioCodPostal" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="DETALLEORDEN" Relationship="Self.FK_Order_Details_Ordenes" FromRole="ORDENES" ToRole="DETALLEORDEN" />
+    <NavigationProperty Name="USUARIO" Relationship="Self.FK_Ordenes_Usuario" FromRole="ORDENES" ToRole="USUARIO" />
+  </EntityType>
+  <EntityType Name="PRODUCTOS">
+    <Key>
+      <PropertyRef Name="IDProducto" />
+    </Key>
+    <Property Name="IDProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreProducto" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IDProveedor" Type="Int32" />
+    <Property Name="IDCategoria" Type="Int32" />
+    <Property Name="CantidadPorUnidad" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Precio" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="UnidadesEnStock" Type="Int16" />
+    <Property Name="UnidadesEnOrden" Type="Int16" />
+    <Property Name="Estado" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CATEGORIA" Relationship="Self.FK_Productos_Categorias" FromRole="PRODUCTOS" ToRole="CATEGORIA" />
+    <NavigationProperty Name="DETALLEORDEN" Relationship="Self.FK_Order_Details_Productos" FromRole="PRODUCTOS" ToRole="DETALLEORDEN" />
+    <NavigationProperty Name="PROVEEDORES" Relationship="Self.FK_Productos_Proveedores" FromRole="PRODUCTOS" ToRole="PROVEEDORES" />
+  </EntityType>
+  <EntityType Name="PROVEEDORES">
+    <Key>
+      <PropertyRef Name="IDProveedor" />
+    </Key>
+    <Property Name="IDProveedor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NombreContacto" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Direccion" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="Ciudad" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Canton" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="CodigoPostal" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Pais" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Telefono" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+    <Property Name="PaginaWeb" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="PRODUCTOS" Relationship="Self.FK_Productos_Proveedores" FromRole="PROVEEDORES" ToRole="PRODUCTOS" />
+  </EntityType>
+  <EntityType Name="USUARIO">
+    <Key>
+      <PropertyRef Name="IDUsuario" />
+    </Key>
+    <Property Name="IDUsuario" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Apellido" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Direccion" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="Ciudad" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Canton" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="CodigoPostal" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Pais" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Telefono" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+    <Property Name="Tipo" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+    <Property Name="UltimaConexion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="ORDENES" Relationship="Self.FK_Ordenes_Usuario" FromRole="USUARIO" ToRole="ORDENES" />
+  </EntityType>
+  <Association Name="FK_Productos_Categorias">
+    <End Role="CATEGORIA" Type="Self.CATEGORIA" Multiplicity="0..1" />
+    <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CATEGORIA">
+        <PropertyRef Name="IDCategoria" />
+      </Principal>
+      <Dependent Role="PRODUCTOS">
+        <PropertyRef Name="IDCategoria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Details_Ordenes">
+    <End Role="ORDENES" Type="Self.ORDENES" Multiplicity="1" />
+    <End Role="DETALLEORDEN" Type="Self.DETALLEORDEN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORDENES">
+        <PropertyRef Name="IDOrden" />
+      </Principal>
+      <Dependent Role="DETALLEORDEN">
+        <PropertyRef Name="IDOrden" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Details_Productos">
+    <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="1" />
+    <End Role="DETALLEORDEN" Type="Self.DETALLEORDEN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTOS">
+        <PropertyRef Name="IDProducto" />
+      </Principal>
+      <Dependent Role="DETALLEORDEN">
+        <PropertyRef Name="IDProducto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ordenes_Usuario">
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+    <End Role="ORDENES" Type="Self.ORDENES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="IDUsuario" />
+      </Principal>
+      <Dependent Role="ORDENES">
+        <PropertyRef Name="IDUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Productos_Proveedores">
+    <End Role="PROVEEDORES" Type="Self.PROVEEDORES" Multiplicity="0..1" />
+    <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROVEEDORES">
+        <PropertyRef Name="IDProveedor" />
+      </Principal>
+      <Dependent Role="PRODUCTOS">
+        <PropertyRef Name="IDProveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GYM3Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CATEGORIA" EntityType="Self.CATEGORIA" />
+    <EntitySet Name="DETALLEORDEN" EntityType="Self.DETALLEORDEN" />
+    <EntitySet Name="ORDENES" EntityType="Self.ORDENES" />
+    <EntitySet Name="PRODUCTOS" EntityType="Self.PRODUCTOS" />
+    <EntitySet Name="PROVEEDORES" EntityType="Self.PROVEEDORES" />
+    <EntitySet Name="USUARIO" EntityType="Self.USUARIO" />
+    <AssociationSet Name="FK_Productos_Categorias" Association="Self.FK_Productos_Categorias">
+      <End Role="CATEGORIA" EntitySet="CATEGORIA" />
+      <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Details_Ordenes" Association="Self.FK_Order_Details_Ordenes">
+      <End Role="ORDENES" EntitySet="ORDENES" />
+      <End Role="DETALLEORDEN" EntitySet="DETALLEORDEN" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Details_Productos" Association="Self.FK_Order_Details_Productos">
+      <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+      <End Role="DETALLEORDEN" EntitySet="DETALLEORDEN" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ordenes_Usuario" Association="Self.FK_Ordenes_Usuario">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="ORDENES" EntitySet="ORDENES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Productos_Proveedores" Association="Self.FK_Productos_Proveedores">
+      <End Role="PROVEEDORES" EntitySet="PROVEEDORES" />
+      <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

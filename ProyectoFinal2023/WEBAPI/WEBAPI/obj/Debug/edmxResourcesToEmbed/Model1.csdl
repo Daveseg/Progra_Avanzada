@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GYM_PROYECTOModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="TCategoria">
+    <Key>
+      <PropertyRef Name="ConCategoria" />
+    </Key>
+    <Property Name="ConCategoria" Type="Int64" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="TProductos" Relationship="Self.FK_Productos_Categorias" FromRole="TCategoria" ToRole="TProductos" />
+  </EntityType>
+  <EntityType Name="TEstadoOrden">
+    <Key>
+      <PropertyRef Name="ConEstadoOrden" />
+    </Key>
+    <Property Name="ConEstadoOrden" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="TOrdenes" Relationship="Self.FK_conEstado_Ordenes" FromRole="TEstadoOrden" ToRole="TOrdenes" />
+  </EntityType>
+  <EntityType Name="TOrdenes">
+    <Key>
+      <PropertyRef Name="ConOrdenes" />
+    </Key>
+    <Property Name="ConOrdenes" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ConUsuario" Type="Int64" Nullable="false" />
+    <Property Name="ConProductos" Type="Int64" Nullable="false" />
+    <Property Name="DiaOrden" Type="DateTime" Precision="3" />
+    <Property Name="FechaEntrega" Type="DateTime" Precision="3" />
+    <Property Name="Direccion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="Ciudad" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Canton" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="CodigoPostal" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="ConEstadoOrden" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="TEstadoOrden" Relationship="Self.FK_conEstado_Ordenes" FromRole="TOrdenes" ToRole="TEstadoOrden" />
+    <NavigationProperty Name="TProductos" Relationship="Self.FK_conProducto_Ordenes" FromRole="TOrdenes" ToRole="TProductos" />
+    <NavigationProperty Name="TUsuario" Relationship="Self.FK_Ordenes_Usuario" FromRole="TOrdenes" ToRole="TUsuario" />
+  </EntityType>
+  <EntityType Name="TProductos">
+    <Key>
+      <PropertyRef Name="ConProductos" />
+    </Key>
+    <Property Name="ConProductos" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreProducto" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ConProovedores" Type="Int64" Nullable="false" />
+    <Property Name="ConCategoria" Type="Int64" Nullable="false" />
+    <Property Name="Precio" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="TotalUnidades" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TCategoria" Relationship="Self.FK_Productos_Categorias" FromRole="TProductos" ToRole="TCategoria" />
+    <NavigationProperty Name="TOrdenes" Relationship="Self.FK_conProducto_Ordenes" FromRole="TProductos" ToRole="TOrdenes" />
+    <NavigationProperty Name="TProovedores" Relationship="Self.FK_Productos_Proveedores" FromRole="TProductos" ToRole="TProovedores" />
+  </EntityType>
+  <EntityType Name="TProovedores">
+    <Key>
+      <PropertyRef Name="ConProovedores" />
+    </Key>
+    <Property Name="ConProovedores" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreEmpresa" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NombreContacto" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Direccion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="Ciudad" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Canton" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="CodigoPostal" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Telefono" Type="String" MaxLength="24" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TProductos" Relationship="Self.FK_Productos_Proveedores" FromRole="TProovedores" ToRole="TProductos" />
+  </EntityType>
+  <EntityType Name="TProvincia">
+    <Key>
+      <PropertyRef Name="ConProvincia" />
+    </Key>
+    <Property Name="ConProvincia" Type="Int64" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="TUsuario" Relationship="Self.FK_TProvincia_TUsuario" FromRole="TProvincia" ToRole="TUsuario" />
+  </EntityType>
+  <EntityType Name="TRoles">
+    <Key>
+      <PropertyRef Name="ConRol" />
+    </Key>
+    <Property Name="ConRol" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="TUsuario" Relationship="Self.FK_TRoles_TUsuario" FromRole="TRoles" ToRole="TUsuario" />
+  </EntityType>
+  <EntityType Name="TUsuario">
+    <Key>
+      <PropertyRef Name="ConUsuario" />
+    </Key>
+    <Property Name="ConUsuario" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Cedula" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Correo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Contrasenna" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Direccion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="Ciudad" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Canton" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="CodigoPostal" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Telefono" Type="String" MaxLength="24" FixedLength="false" Unicode="false" />
+    <Property Name="Estado" Type="Boolean" Nullable="false" />
+    <Property Name="ConRol" Type="Int64" Nullable="false" />
+    <Property Name="ConProvincia" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="TOrdenes" Relationship="Self.FK_Ordenes_Usuario" FromRole="TUsuario" ToRole="TOrdenes" />
+    <NavigationProperty Name="TProvincia" Relationship="Self.FK_TProvincia_TUsuario" FromRole="TUsuario" ToRole="TProvincia" />
+    <NavigationProperty Name="TRoles" Relationship="Self.FK_TRoles_TUsuario" FromRole="TUsuario" ToRole="TRoles" />
+  </EntityType>
+  <Association Name="FK_Productos_Categorias">
+    <End Role="TCategoria" Type="Self.TCategoria" Multiplicity="1" />
+    <End Role="TProductos" Type="Self.TProductos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TCategoria">
+        <PropertyRef Name="ConCategoria" />
+      </Principal>
+      <Dependent Role="TProductos">
+        <PropertyRef Name="ConCategoria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_conEstado_Ordenes">
+    <End Role="TEstadoOrden" Type="Self.TEstadoOrden" Multiplicity="1" />
+    <End Role="TOrdenes" Type="Self.TOrdenes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TEstadoOrden">
+        <PropertyRef Name="ConEstadoOrden" />
+      </Principal>
+      <Dependent Role="TOrdenes">
+        <PropertyRef Name="ConEstadoOrden" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_conProducto_Ordenes">
+    <End Role="TProductos" Type="Self.TProductos" Multiplicity="1" />
+    <End Role="TOrdenes" Type="Self.TOrdenes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TProductos">
+        <PropertyRef Name="ConProductos" />
+      </Principal>
+      <Dependent Role="TOrdenes">
+        <PropertyRef Name="ConProductos" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ordenes_Usuario">
+    <End Role="TUsuario" Type="Self.TUsuario" Multiplicity="1" />
+    <End Role="TOrdenes" Type="Self.TOrdenes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TUsuario">
+        <PropertyRef Name="ConUsuario" />
+      </Principal>
+      <Dependent Role="TOrdenes">
+        <PropertyRef Name="ConUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Productos_Proveedores">
+    <End Role="TProovedores" Type="Self.TProovedores" Multiplicity="1" />
+    <End Role="TProductos" Type="Self.TProductos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TProovedores">
+        <PropertyRef Name="ConProovedores" />
+      </Principal>
+      <Dependent Role="TProductos">
+        <PropertyRef Name="ConProovedores" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TProvincia_TUsuario">
+    <End Role="TProvincia" Type="Self.TProvincia" Multiplicity="1" />
+    <End Role="TUsuario" Type="Self.TUsuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TProvincia">
+        <PropertyRef Name="ConProvincia" />
+      </Principal>
+      <Dependent Role="TUsuario">
+        <PropertyRef Name="ConProvincia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TRoles_TUsuario">
+    <End Role="TRoles" Type="Self.TRoles" Multiplicity="1" />
+    <End Role="TUsuario" Type="Self.TUsuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TRoles">
+        <PropertyRef Name="ConRol" />
+      </Principal>
+      <Dependent Role="TUsuario">
+        <PropertyRef Name="ConRol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GYM_PROYECTOEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="TCategoria" EntityType="Self.TCategoria" />
+    <EntitySet Name="TEstadoOrden" EntityType="Self.TEstadoOrden" />
+    <EntitySet Name="TOrdenes" EntityType="Self.TOrdenes" />
+    <EntitySet Name="TProductos" EntityType="Self.TProductos" />
+    <EntitySet Name="TProovedores" EntityType="Self.TProovedores" />
+    <EntitySet Name="TProvincia" EntityType="Self.TProvincia" />
+    <EntitySet Name="TRoles" EntityType="Self.TRoles" />
+    <EntitySet Name="TUsuario" EntityType="Self.TUsuario" />
+    <AssociationSet Name="FK_Productos_Categorias" Association="Self.FK_Productos_Categorias">
+      <End Role="TCategoria" EntitySet="TCategoria" />
+      <End Role="TProductos" EntitySet="TProductos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_conEstado_Ordenes" Association="Self.FK_conEstado_Ordenes">
+      <End Role="TEstadoOrden" EntitySet="TEstadoOrden" />
+      <End Role="TOrdenes" EntitySet="TOrdenes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_conProducto_Ordenes" Association="Self.FK_conProducto_Ordenes">
+      <End Role="TProductos" EntitySet="TProductos" />
+      <End Role="TOrdenes" EntitySet="TOrdenes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ordenes_Usuario" Association="Self.FK_Ordenes_Usuario">
+      <End Role="TUsuario" EntitySet="TUsuario" />
+      <End Role="TOrdenes" EntitySet="TOrdenes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Productos_Proveedores" Association="Self.FK_Productos_Proveedores">
+      <End Role="TProovedores" EntitySet="TProovedores" />
+      <End Role="TProductos" EntitySet="TProductos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TProvincia_TUsuario" Association="Self.FK_TProvincia_TUsuario">
+      <End Role="TProvincia" EntitySet="TProvincia" />
+      <End Role="TUsuario" EntitySet="TUsuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TRoles_TUsuario" Association="Self.FK_TRoles_TUsuario">
+      <End Role="TRoles" EntitySet="TRoles" />
+      <End Role="TUsuario" EntitySet="TUsuario" />
+    </AssociationSet>
+    <FunctionImport Name="IniciarSesionSP" ReturnType="Collection(GYM_PROYECTOModel.IniciarSesionSP_Result)">
+      <Parameter Name="Correo" Mode="In" Type="String" />
+      <Parameter Name="Contrasenna" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="RecuperarCuentaSP" ReturnType="Collection(GYM_PROYECTOModel.RecuperarCuentaSP_Result)">
+      <Parameter Name="Cedula" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="RegistrarCuentaSP">
+      <Parameter Name="Cedula" Mode="In" Type="String" />
+      <Parameter Name="Nombre" Mode="In" Type="String" />
+      <Parameter Name="Correo" Mode="In" Type="String" />
+      <Parameter Name="Contrasenna" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="IniciarSesionSP_Result">
+    <Property Type="Int64" Name="ConUsuario" Nullable="false" />
+    <Property Type="String" Name="Cedula" Nullable="false" MaxLength="25" />
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Correo" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Contrasenna" Nullable="false" MaxLength="25" />
+    <Property Type="Boolean" Name="Estado" Nullable="false" />
+    <Property Type="String" Name="DescripcionProvincia" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="DescripcionRol" Nullable="false" MaxLength="30" />
+  </ComplexType>
+  <ComplexType Name="RecuperarCuentaSP_Result">
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Correo" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Contrasenna" Nullable="false" MaxLength="25" />
+  </ComplexType>
+</Schema>

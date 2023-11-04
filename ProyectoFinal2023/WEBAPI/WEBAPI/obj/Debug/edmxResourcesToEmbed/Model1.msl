@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GYM_PROYECTOModelStoreContainer" CdmEntityContainer="GYM_PROYECTOEntities">
+    <EntitySetMapping Name="TCategoria">
+      <EntityTypeMapping TypeName="GYM_PROYECTOModel.TCategoria">
+        <MappingFragment StoreEntitySet="TCategoria">
+          <ScalarProperty Name="ConCategoria" ColumnName="ConCategoria" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TEstadoOrden">
+      <EntityTypeMapping TypeName="GYM_PROYECTOModel.TEstadoOrden">
+        <MappingFragment StoreEntitySet="TEstadoOrden">
+          <ScalarProperty Name="ConEstadoOrden" ColumnName="ConEstadoOrden" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TOrdenes">
+      <EntityTypeMapping TypeName="GYM_PROYECTOModel.TOrdenes">
+        <MappingFragment StoreEntitySet="TOrdenes">
+          <ScalarProperty Name="ConOrdenes" ColumnName="ConOrdenes" />
+          <ScalarProperty Name="ConUsuario" ColumnName="ConUsuario" />
+          <ScalarProperty Name="ConProductos" ColumnName="ConProductos" />
+          <ScalarProperty Name="DiaOrden" ColumnName="DiaOrden" />
+          <ScalarProperty Name="FechaEntrega" ColumnName="FechaEntrega" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+          <ScalarProperty Name="Canton" ColumnName="Canton" />
+          <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+          <ScalarProperty Name="ConEstadoOrden" ColumnName="ConEstadoOrden" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TProductos">
+      <EntityTypeMapping TypeName="GYM_PROYECTOModel.TProductos">
+        <MappingFragment StoreEntitySet="TProductos">
+          <ScalarProperty Name="ConProductos" ColumnName="ConProductos" />
+          <ScalarProperty Name="NombreProducto" ColumnName="NombreProducto" />
+          <ScalarProperty Name="ConProovedores" ColumnName="ConProovedores" />
+          <ScalarProperty Name="ConCategoria" ColumnName="ConCategoria" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="TotalUnidades" ColumnName="TotalUnidades" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TProovedores">
+      <EntityTypeMapping TypeName="GYM_PROYECTOModel.TProovedores">
+        <MappingFragment StoreEntitySet="TProovedores">
+          <ScalarProperty Name="ConProovedores" ColumnName="ConProovedores" />
+          <ScalarProperty Name="NombreEmpresa" ColumnName="NombreEmpresa" />
+          <ScalarProperty Name="NombreContacto" ColumnName="NombreContacto" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+          <ScalarProperty Name="Canton" ColumnName="Canton" />
+          <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TProvincia">
+      <EntityTypeMapping TypeName="GYM_PROYECTOModel.TProvincia">
+        <MappingFragment StoreEntitySet="TProvincia">
+          <ScalarProperty Name="ConProvincia" ColumnName="ConProvincia" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TRoles">
+      <EntityTypeMapping TypeName="GYM_PROYECTOModel.TRoles">
+        <MappingFragment StoreEntitySet="TRoles">
+          <ScalarProperty Name="ConRol" ColumnName="ConRol" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TUsuario">
+      <EntityTypeMapping TypeName="GYM_PROYECTOModel.TUsuario">
+        <MappingFragment StoreEntitySet="TUsuario">
+          <ScalarProperty Name="ConUsuario" ColumnName="ConUsuario" />
+          <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+          <ScalarProperty Name="Contrasenna" ColumnName="Contrasenna" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+          <ScalarProperty Name="Canton" ColumnName="Canton" />
+          <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="ConRol" ColumnName="ConRol" />
+          <ScalarProperty Name="ConProvincia" ColumnName="ConProvincia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="IniciarSesionSP" FunctionName="GYM_PROYECTOModel.Store.IniciarSesionSP">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GYM_PROYECTOModel.IniciarSesionSP_Result">
+          <ScalarProperty Name="ConUsuario" ColumnName="ConUsuario" />
+          <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+          <ScalarProperty Name="Contrasenna" ColumnName="Contrasenna" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="DescripcionProvincia" ColumnName="DescripcionProvincia" />
+          <ScalarProperty Name="DescripcionRol" ColumnName="DescripcionRol" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="RecuperarCuentaSP" FunctionName="GYM_PROYECTOModel.Store.RecuperarCuentaSP">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GYM_PROYECTOModel.RecuperarCuentaSP_Result">
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+          <ScalarProperty Name="Contrasenna" ColumnName="Contrasenna" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="RegistrarCuentaSP" FunctionName="GYM_PROYECTOModel.Store.RegistrarCuentaSP" />
+  </EntityContainerMapping>
+</Mapping>

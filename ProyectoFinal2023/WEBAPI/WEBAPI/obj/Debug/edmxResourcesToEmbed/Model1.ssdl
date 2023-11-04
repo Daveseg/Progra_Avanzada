@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GYM_PROYECTOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="TCategoria">
+    <Key>
+      <PropertyRef Name="ConCategoria" />
+    </Key>
+    <Property Name="ConCategoria" Type="bigint" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TEstadoOrden">
+    <Key>
+      <PropertyRef Name="ConEstadoOrden" />
+    </Key>
+    <Property Name="ConEstadoOrden" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TOrdenes">
+    <Key>
+      <PropertyRef Name="ConOrdenes" />
+    </Key>
+    <Property Name="ConOrdenes" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ConUsuario" Type="bigint" Nullable="false" />
+    <Property Name="ConProductos" Type="bigint" Nullable="false" />
+    <Property Name="DiaOrden" Type="datetime" />
+    <Property Name="FechaEntrega" Type="datetime" />
+    <Property Name="Direccion" Type="varchar" MaxLength="60" />
+    <Property Name="Ciudad" Type="varchar" MaxLength="15" />
+    <Property Name="Canton" Type="varchar" MaxLength="15" />
+    <Property Name="CodigoPostal" Type="varchar" MaxLength="10" />
+    <Property Name="ConEstadoOrden" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TProductos">
+    <Key>
+      <PropertyRef Name="ConProductos" />
+    </Key>
+    <Property Name="ConProductos" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreProducto" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="ConProovedores" Type="bigint" Nullable="false" />
+    <Property Name="ConCategoria" Type="bigint" Nullable="false" />
+    <Property Name="Precio" Type="money" Nullable="false" />
+    <Property Name="TotalUnidades" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TProovedores">
+    <Key>
+      <PropertyRef Name="ConProovedores" />
+    </Key>
+    <Property Name="ConProovedores" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreEmpresa" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="NombreContacto" Type="varchar" MaxLength="30" />
+    <Property Name="Direccion" Type="varchar" MaxLength="60" />
+    <Property Name="Ciudad" Type="varchar" MaxLength="15" />
+    <Property Name="Canton" Type="varchar" MaxLength="15" />
+    <Property Name="CodigoPostal" Type="varchar" MaxLength="10" />
+    <Property Name="Telefono" Type="varchar" MaxLength="24" />
+  </EntityType>
+  <EntityType Name="TProvincia">
+    <Key>
+      <PropertyRef Name="ConProvincia" />
+    </Key>
+    <Property Name="ConProvincia" Type="bigint" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TRoles">
+    <Key>
+      <PropertyRef Name="ConRol" />
+    </Key>
+    <Property Name="ConRol" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TUsuario">
+    <Key>
+      <PropertyRef Name="ConUsuario" />
+    </Key>
+    <Property Name="ConUsuario" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Cedula" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Correo" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Contrasenna" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="Direccion" Type="varchar" MaxLength="60" />
+    <Property Name="Ciudad" Type="varchar" MaxLength="15" />
+    <Property Name="Canton" Type="varchar" MaxLength="15" />
+    <Property Name="CodigoPostal" Type="varchar" MaxLength="10" />
+    <Property Name="Telefono" Type="varchar" MaxLength="24" />
+    <Property Name="Estado" Type="bit" Nullable="false" />
+    <Property Name="ConRol" Type="bigint" Nullable="false" />
+    <Property Name="ConProvincia" Type="bigint" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_conEstado_Ordenes">
+    <End Role="TEstadoOrden" Type="Self.TEstadoOrden" Multiplicity="1" />
+    <End Role="TOrdenes" Type="Self.TOrdenes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TEstadoOrden">
+        <PropertyRef Name="ConEstadoOrden" />
+      </Principal>
+      <Dependent Role="TOrdenes">
+        <PropertyRef Name="ConEstadoOrden" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_conProducto_Ordenes">
+    <End Role="TProductos" Type="Self.TProductos" Multiplicity="1" />
+    <End Role="TOrdenes" Type="Self.TOrdenes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TProductos">
+        <PropertyRef Name="ConProductos" />
+      </Principal>
+      <Dependent Role="TOrdenes">
+        <PropertyRef Name="ConProductos" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ordenes_Usuario">
+    <End Role="TUsuario" Type="Self.TUsuario" Multiplicity="1" />
+    <End Role="TOrdenes" Type="Self.TOrdenes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TUsuario">
+        <PropertyRef Name="ConUsuario" />
+      </Principal>
+      <Dependent Role="TOrdenes">
+        <PropertyRef Name="ConUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Productos_Categorias">
+    <End Role="TCategoria" Type="Self.TCategoria" Multiplicity="1" />
+    <End Role="TProductos" Type="Self.TProductos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TCategoria">
+        <PropertyRef Name="ConCategoria" />
+      </Principal>
+      <Dependent Role="TProductos">
+        <PropertyRef Name="ConCategoria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Productos_Proveedores">
+    <End Role="TProovedores" Type="Self.TProovedores" Multiplicity="1" />
+    <End Role="TProductos" Type="Self.TProductos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TProovedores">
+        <PropertyRef Name="ConProovedores" />
+      </Principal>
+      <Dependent Role="TProductos">
+        <PropertyRef Name="ConProovedores" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TProvincia_TUsuario">
+    <End Role="TProvincia" Type="Self.TProvincia" Multiplicity="1" />
+    <End Role="TUsuario" Type="Self.TUsuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TProvincia">
+        <PropertyRef Name="ConProvincia" />
+      </Principal>
+      <Dependent Role="TUsuario">
+        <PropertyRef Name="ConProvincia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TRoles_TUsuario">
+    <End Role="TRoles" Type="Self.TRoles" Multiplicity="1" />
+    <End Role="TUsuario" Type="Self.TUsuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TRoles">
+        <PropertyRef Name="ConRol" />
+      </Principal>
+      <Dependent Role="TUsuario">
+        <PropertyRef Name="ConRol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="IniciarSesionSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Correo" Type="varchar" Mode="In" />
+    <Parameter Name="Contrasenna" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="RecuperarCuentaSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Cedula" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="RegistrarCuentaSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Cedula" Type="varchar" Mode="In" />
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+    <Parameter Name="Correo" Type="varchar" Mode="In" />
+    <Parameter Name="Contrasenna" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="GYM_PROYECTOModelStoreContainer">
+    <EntitySet Name="TCategoria" EntityType="Self.TCategoria" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TEstadoOrden" EntityType="Self.TEstadoOrden" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TOrdenes" EntityType="Self.TOrdenes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TProductos" EntityType="Self.TProductos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TProovedores" EntityType="Self.TProovedores" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TProvincia" EntityType="Self.TProvincia" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TRoles" EntityType="Self.TRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TUsuario" EntityType="Self.TUsuario" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_conEstado_Ordenes" Association="Self.FK_conEstado_Ordenes">
+      <End Role="TEstadoOrden" EntitySet="TEstadoOrden" />
+      <End Role="TOrdenes" EntitySet="TOrdenes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_conProducto_Ordenes" Association="Self.FK_conProducto_Ordenes">
+      <End Role="TProductos" EntitySet="TProductos" />
+      <End Role="TOrdenes" EntitySet="TOrdenes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ordenes_Usuario" Association="Self.FK_Ordenes_Usuario">
+      <End Role="TUsuario" EntitySet="TUsuario" />
+      <End Role="TOrdenes" EntitySet="TOrdenes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Productos_Categorias" Association="Self.FK_Productos_Categorias">
+      <End Role="TCategoria" EntitySet="TCategoria" />
+      <End Role="TProductos" EntitySet="TProductos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Productos_Proveedores" Association="Self.FK_Productos_Proveedores">
+      <End Role="TProovedores" EntitySet="TProovedores" />
+      <End Role="TProductos" EntitySet="TProductos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TProvincia_TUsuario" Association="Self.FK_TProvincia_TUsuario">
+      <End Role="TProvincia" EntitySet="TProvincia" />
+      <End Role="TUsuario" EntitySet="TUsuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TRoles_TUsuario" Association="Self.FK_TRoles_TUsuario">
+      <End Role="TRoles" EntitySet="TRoles" />
+      <End Role="TUsuario" EntitySet="TUsuario" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
