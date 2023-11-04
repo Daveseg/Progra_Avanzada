@@ -23,17 +23,14 @@
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <lr class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="@Url.Action("IniciarSesion","Login")">
-                        Iniciar Seccion
-                        <i class="ti-home text-primary"></i>
+                        Iniciar Seccion 
                     </a>
 
                     <a class="dropdown-item" href="@Url.Action("RegistrarCuenta","Login")">Registar Cuenta</a>
-
-                    <li><hr class="dropdown-divider" /></li>
-
-                </ul>
+                    <hr class="dropdown-divider" />
+                </lr>
             </li>
         </ul>
     </nav>
@@ -119,7 +116,7 @@
 
                 <h1 class="mt-4">Bienvenidos a Suplementicos</h1>
                 <ol class="breadcrumb mb-4">
-                    <img src="~/imagenes/suplementos01.jpg" width="1600" height="350" />
+                    <a><img src="~/imagenes/suplementos01.jpg" width="1600" height="350" /></a>
                 </ol>
 
                 <div class="row">

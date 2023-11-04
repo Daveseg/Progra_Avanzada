@@ -1,38 +1,55 @@
 ﻿@model ProyectoVersion._1._0.Entities.UsuarioEnt
 @{
     ViewBag.Title = "RecuperarCuenta";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout_Login.cshtml";
 }
 
-<h2>RecuperarCuenta</h2>
+<h2>Recuperar Cuenta</h2>
 
-<div class="auth-form-light text-left py-5 px-4 px-sm-5">
-    <div class="brand-logo">
-        <img src="~/imagenes/Suplementicos.jpg" alt="logo">
+<div class="content-wrapper d-flex align-items-center auth px-0">
+    <div class="row w-100 mx-0">
+        <div class="col-lg-4 mx-auto">
+            <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+                <div class="brand-logo">
+                    <img src="~/imagenes/proteina.jpg" alt="logo" width="100" height="100">
 
+                </div>
+
+                @if (ViewBag.MensajeUsuario != null)
+                {
+                    <div class="alert alert-danger" role="alert" style="text-align:center">
+                        @ViewBag.MensajeUsuario
+                    </div>
+                }
+
+                @using (Html.BeginForm("RecuperarCuenta", "Login", FormMethod.Post, new { @class = "pt-3" }))
+                {
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.Correo, new { @class = "form-control form-control-lg", @placeholder = "Correo Electrónico", @type = "email" })
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.Correo, new { @class = "form-control form-control-lg", @placeholder = "Correo Electrónico", @type = "email" })
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.Contrasenna, new { @class = "form-control form-control-lg", @placeholder = "Contraseña", @type = "password" })
+                    </div>
+                    <br />
+                    <div class="mt-3">
+                        <input type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" value="Registar Cuenta">
+                    </div>
+                    <br />
+                    <div class="text-center mt-4 font-weight-light">
+                        ¿Olvidaste tu contraseña? <a href="@Url.Action("RecuperarCuenta","Login")" class="text-primary">Recuperar</a>
+                        <br />
+                        ¿No tienes una cuenta? <a href="@Url.Action("RegistrarCuenta","Login")" class="text-primary">Registrarse</a>
+                    </div>
+                }
+
+            </div>
+        </div>
     </div>
-
-    @if (ViewBag.MensajeUsuario != null)
-    {
-        <div class="alert alert-danger" role="alert" style="text-align:center">
-            @ViewBag.MensajeUsuario
-        </div>
-    }
-
-    @using (Html.BeginForm("RegistrarCuenta", "Login", FormMethod.Post, new { @class = "pt-3" }))
-    {
-    
-        <div class="form-group">
-            @Html.TextBoxFor(m => m.Contrasenna, new { @class = "form-control form-control-lg", @placeholder = "Contraseña", @type = "password" })
-        </div>
-        <br />
-        <div class="mt-3">
-            <input type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" value="REGISTRARSE">
-        </div>
-        <br />
-        <div class="text-center mt-4 font-weight-light">
-            ¿Ya tienes una cuenta? <a href="@Url.Action("IniciarSesion","Login")" class="text-primary">Iniciar Sesión</a>
-        </div>
-    }
-
 </div>
+
+
