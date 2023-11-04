@@ -24,8 +24,12 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li> <a href="~/Views/Login/IniciarSesion.cshtml">Iniciar Seccion</a></li>
-                    <li><a href="~/Views/Login/RegistrarCuenta.cshtml">RegistrarCuenta</a></li>
+                    <a class="dropdown-item" href="@Url.Action("IniciarSesion","Login")">
+                        Iniciar Seccion
+                        <i class="ti-home text-primary"></i>
+                    </a>
+
+                    <a class="dropdown-item" href="@Url.Action("RegistrarCuenta","Login")">Registar Cuenta</a>
 
                     <li><hr class="dropdown-divider" /></li>
 

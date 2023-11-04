@@ -14,10 +14,15 @@ namespace ProyectoVersion._1._0.Controllers
 
         UsuarioModel modelUsuario = new UsuarioModel();
         // GET: Login
+
+
         public ActionResult Index()
         {
             return View();
         }
+
+
+        //INICIAR SESSION
 
         [HttpGet]
         public ActionResult IniciarSesion()
@@ -42,6 +47,7 @@ namespace ProyectoVersion._1._0.Controllers
             }
         }
 
+        //REGISTAR UNA CUENTA 
 
         [HttpGet]
         public ActionResult RegistrarCuenta()
@@ -66,6 +72,40 @@ namespace ProyectoVersion._1._0.Controllers
         }
 
 
+        //CERRAR SECCION 
+
+        [HttpGet]
+        public ActionResult CerrarSesion()
+        {
+            Session.Clear();
+            return RedirectToAction("IniciarSesion", "Login");
+        }
+
+
+
+        //RECUPERAR CUENTA 
+
+        [HttpGet]
+        public ActionResult RecuperarCuenta()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult RecuperarCuenta(UsuarioEnt entidad)
+        {
+            string respuesta = modelUsuario.RecuperarCuenta(entidad);
+
+            if (respuesta == "OK")
+            {
+                return RedirectToAction("IniciarSesion", "Login");
+            }
+            else
+            {
+                ViewBag.MensajeUsuario = "No se ha podido recuperar su información";
+                return View();
+            }
+        }
 
 
 

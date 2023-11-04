@@ -1,8 +1,10 @@
 ﻿@model ProyectoVersion._1._0.Entities.UsuarioEnt
 @{
-    ViewBag.Title = "RegistrarCuenta";
+    ViewBag.Title = "RecuperarCuenta";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<h2>RecuperarCuenta</h2>
 
 <div class="auth-form-light text-left py-5 px-4 px-sm-5">
     <div class="brand-logo">
@@ -19,25 +21,7 @@
 
     @using (Html.BeginForm("RegistrarCuenta", "Login", FormMethod.Post, new { @class = "pt-3" }))
     {
-        <div class="form-group">
-            @Html.TextBoxFor(m => m.Cedula, new
-            {
-                @class = "form-control form-control-lg",
-                @placeholder = "Identificación",
-           @type = "text",
-           onkeyup = "ConsultarNombre();"
-       })
-        </div>
-        <br />
-        <div class="form-group">
-            @Html.TextBoxFor(m => m.Nombre, new { @readOnly = "readOnly", @style = "background-color:#eeeeee", @class = "form-control form-control-lg", @placeholder = "Nombre", @type = "text" })
-        </div>
-        <br />
-
-        <div class="form-group">
-            @Html.TextBoxFor(m => m.Correo, new { @class = "form-control form-control-lg", @placeholder = "Correo Electrónico", @type = "email" })
-        </div>
-        <br />
+    
         <div class="form-group">
             @Html.TextBoxFor(m => m.Contrasenna, new { @class = "form-control form-control-lg", @placeholder = "Contraseña", @type = "password" })
         </div>

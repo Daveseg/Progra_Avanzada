@@ -44,5 +44,16 @@ namespace ProyectoVersion._1._0.Models
             }
         }
 
+
+        public string RecuperarCuenta(UsuarioEnt entidad)
+        {
+            using (var client = new HttpClient())
+            {
+                var urlApi = rutaServidor + "RecuperarCuenta?Identificacion=" + entidad.Cedula;
+                var res = client.GetAsync(urlApi).Result;
+                return res.Content.ReadFromJsonAsync<string>().Result;
+            }
+        }
+
     }
 }
