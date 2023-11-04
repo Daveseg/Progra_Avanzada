@@ -12,7 +12,6 @@
                     <img src="~/imagenes/proteina.jpg" alt="logo" width="100" height="100">
 
                 </div>
-
                 @if (ViewBag.MensajeUsuario != null)
                 {
                     <div class="alert alert-danger" role="alert" style="text-align:center">
@@ -20,10 +19,14 @@
                     </div>
                 }
 
-                @using (Html.BeginForm("RecuperarCuenta", "Login", FormMethod.Post, new { @class = "pt-3" }))
+                @using (Html.BeginForm("RegistrarCuenta", "Login", FormMethod.Post, new { @class = "pt-3" }))
                 {
                     <div class="form-group">
-                        @Html.TextBoxFor(m => m.Correo, new { @class = "form-control form-control-lg", @placeholder = "Correo Electrónico", @type = "email" })
+                        @Html.TextBoxFor(m => m.Cedula, new { @class = "form-control form-control-lg", @placeholder = "Cedula", @type = "text" })
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control form-control-lg", @placeholder = "Nombre", @type = "text" })
                     </div>
                     <br />
                     <div class="form-group">

@@ -14,8 +14,6 @@ namespace ProyectoVersion._1._0.Controllers
 
         UsuarioModel modelUsuario = new UsuarioModel();
         // GET: Login
-
-
         public ActionResult Index()
         {
             return View();

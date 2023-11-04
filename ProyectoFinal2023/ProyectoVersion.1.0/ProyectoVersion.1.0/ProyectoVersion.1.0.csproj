@@ -253,6 +253,8 @@
     <Content Include="Views\Login\RegistrarCuenta.cshtml" />
     <Content Include="Views\Shared\_Layout_Index.cshtml" />
     <Content Include="Views\Login\RecuperarCuenta.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Login\CerrarSesion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
