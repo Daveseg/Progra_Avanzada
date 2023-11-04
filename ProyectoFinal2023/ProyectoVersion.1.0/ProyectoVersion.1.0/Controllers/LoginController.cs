@@ -59,8 +59,8 @@ namespace ProyectoVersion._1._0.Controllers
             string respuesta = modelUsuario.RegistrarCuenta(entidad);
 
             if (respuesta == "OK")
-            {
-                return RedirectToAction("IniciarSesion", "Login");
+            { 
+                return RedirectToAction("RegistrarCuenta", "Login");
             }
             else
             {
@@ -76,7 +76,7 @@ namespace ProyectoVersion._1._0.Controllers
         public ActionResult CerrarSesion()
         {
             Session.Clear();
-            return RedirectToAction("IniciarSesion", "Login");
+            return RedirectToAction("Index", "Home");
         }
 
 
@@ -88,6 +88,7 @@ namespace ProyectoVersion._1._0.Controllers
         {
             return View();
         }
+
 
         [HttpPost]
         public ActionResult RecuperarCuenta(UsuarioEnt entidad)

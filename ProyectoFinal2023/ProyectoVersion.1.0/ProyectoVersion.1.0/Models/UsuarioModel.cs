@@ -22,6 +22,8 @@ namespace ProyectoVersion._1._0.Models
 
         public string rutaServidor = ConfigurationManager.AppSettings["RutaApi"];
 
+
+        //iniciar session
         public UsuarioEnt IniciarSesion(UsuarioEnt entidad)
         {
             using (var client = new HttpClient())
@@ -33,6 +35,7 @@ namespace ProyectoVersion._1._0.Models
             }
         }
 
+        //RegistrarCuenta
         public string RegistrarCuenta(UsuarioEnt entidad)
         {
             using (var client = new HttpClient())
@@ -44,6 +47,7 @@ namespace ProyectoVersion._1._0.Models
             }
         }
 
+        //RecuperarCuenta
 
         public string RecuperarCuenta(UsuarioEnt entidad)
         {
@@ -54,6 +58,8 @@ namespace ProyectoVersion._1._0.Models
                 return res.Content.ReadFromJsonAsync<string>().Result;
             }
         }
+
+
 
     }
 }
