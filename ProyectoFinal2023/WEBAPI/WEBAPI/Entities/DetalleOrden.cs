@@ -7,7 +7,7 @@ namespace WEBAPI.Entities
 {
     public class DetalleOrden
     {
-        public long ConOrdenes { get; set; }
+        public long ConOrdenes { get; set; }  
         public long ConProductos { get; set; }
     }
 }
