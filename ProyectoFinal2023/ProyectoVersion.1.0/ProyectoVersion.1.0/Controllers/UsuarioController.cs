@@ -22,6 +22,14 @@ namespace ProyectoVersion._1._0.Controllers
         }
 
 
+        [HttpGet]
+        public ActionResult ConsultaUsuarios()
+        {
+            var datos = modelUsuario.ConsultaUsuarios();
+            return View(datos);
+        }
 
-    }
+ 
+
+}
 }

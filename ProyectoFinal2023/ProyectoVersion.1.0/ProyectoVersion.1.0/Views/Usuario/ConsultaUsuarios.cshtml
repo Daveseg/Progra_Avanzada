@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ProyectoVersion._1._0.Entities.UsuarioEnt>
+@{
+    ViewBag.Title = "ConsultaUsuarios";
+    Layout = "~/Views/Shared/_Layout_login.cshtml";
+}
+
+<h2>ConsultaUsuarios</h2>
+
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Información de Usuarios</h4>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Identificación</th>
+                        <th>Nombre</th>
+                        <th>Correo Electrónico</th>
+                        <th>DescripcionRol</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Cedula</td>
+                            <td>@item.Nombre</td>
+                            <td>@item.Correo</td>
+                            <td>@item.DescripcionRol</td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

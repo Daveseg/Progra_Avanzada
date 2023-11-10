@@ -53,9 +53,19 @@ namespace ProyectoVersion._1._0.Models
         {
             using (var client = new HttpClient())
             {
-                var urlApi = rutaServidor + "RecuperarCuenta?Identificacion=" + entidad.Cedula;
+                var urlApi = rutaServidor + "RecuperarCuenta?Cedula=" + entidad.Cedula;
                 var res = client.GetAsync(urlApi).Result;
                 return res.Content.ReadFromJsonAsync<string>().Result;
+            }
+        }
+
+        public List<UsuarioEnt> ConsultaUsuarios()
+        {
+            using (var client = new HttpClient())
+            {
+                var urlApi = rutaServidor + "ConsultaUsuarios";
+                var res = client.GetAsync(urlApi).Result;
+                return res.Content.ReadFromJsonAsync<List<UsuarioEnt>>().Result;
             }
         }
 

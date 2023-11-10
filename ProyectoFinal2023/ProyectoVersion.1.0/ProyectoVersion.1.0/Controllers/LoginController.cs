@@ -104,7 +104,7 @@ namespace ProyectoVersion._1._0.Controllers
                 ViewBag.MensajeUsuario = "No se ha podido recuperar su información";
                 return View();
             }
-        }
+         }
 
 
 
