@@ -59,6 +59,8 @@ namespace ProyectoVersion._1._0.Models
             }
         }
 
+
+        //ConsultarUsuario
         public List<UsuarioEnt> ConsultaUsuarios()
         {
             using (var client = new HttpClient())

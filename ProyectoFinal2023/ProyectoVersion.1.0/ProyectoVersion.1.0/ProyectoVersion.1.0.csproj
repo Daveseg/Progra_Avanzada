@@ -234,7 +234,7 @@
     <Content Include="Template\password.html" />
     <Content Include="Template\register.html" />
     <Content Include="Template\tables.html" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_Layout_Admin.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
