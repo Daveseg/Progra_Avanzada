@@ -4,11 +4,10 @@
 --TENGAN CUIDADO CON LOS set identity_insert  OFF OR ON 
 
 CREATE DATABASE GYM_PROYECTO
+GO
+
 USE GYM_PROYECTO
-
-DROP DATABASE GYM_PROYECTO
---Tabla TUsuario 
-
+go
 
 -----Tabla ROL------------ 
 CREATE TABLE TRoles(
@@ -67,17 +66,20 @@ CREATE TABLE "TUsuario" (
 	)
 
 )
+GO
 
 --CREATE TABLE TCategoria 
 
 CREATE TABLE "TCategoria" (
-	"ConCategoria" bigint NOT NULL,
+	"ConCategoria" bigint IDENTITY(1,1) NOT NULL,
 	"Descripcion" varchar (50) NOT NULL ,
+	"Estado" bit not null, 
 	CONSTRAINT "PK_Categorias" PRIMARY KEY  CLUSTERED 
 	(
 		"ConCategoria"
 	)
 )
+GO
 
 -----Tabla TProovedores------------ 
 CREATE TABLE "TProovedores" (
@@ -89,11 +91,13 @@ CREATE TABLE "TProovedores" (
 	"Canton" varchar (15) NULL ,
 	"CodigoPostal" varchar (10) NULL ,
 	"Telefono" varchar (24) NULL ,
+	"Estado" bit not null,
 	CONSTRAINT "PK_Proveedores" PRIMARY KEY  CLUSTERED 
 	(
 		"ConProovedores" 
 	)
 ) 
+GO
 
 --CREATE TABLE PRODUCTOS 
 CREATE TABLE "TProductos" (
@@ -103,6 +107,7 @@ CREATE TABLE "TProductos" (
 	"ConCategoria" bigint NOT NULL,
 	"Precio" "money" NOT NULL,
 	"TotalUnidades" int NOT NULL,
+	"Estado" bit not null,
 	CONSTRAINT "PK_Productos" PRIMARY KEY  CLUSTERED 
 	(
 		"ConProductos"
@@ -120,6 +125,18 @@ CREATE TABLE "TProductos" (
 		"ConProovedores"
 	)
 )
+GO
+
+-----Tabla ESTADOS ORDENES------------ 
+CREATE TABLE TEstadoOrden(
+	ConEstadoOrden bigint IDENTITY(1,1) NOT NULL,
+	Descripcion varchar (30) NOT NULL,
+ CONSTRAINT [PK_TEstadoOrden] PRIMARY KEY CLUSTERED 
+(
+	[ConEstadoOrden] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
 
 --CREATE TABLE ORDENES 
 
@@ -159,23 +176,30 @@ CREATE TABLE "TOrdenes" (
 	)
 )
 
-
-
------Tabla ROL------------ 
-CREATE TABLE TEstadoOrden(
-	ConEstadoOrden bigint IDENTITY(1,1) NOT NULL,
-	Descripcion varchar (30) NOT NULL,
- CONSTRAINT [PK_TEstadoOrden] PRIMARY KEY CLUSTERED 
-(
-	[ConEstadoOrden] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
+GO
+--CREATE TABLE DETALLE ORDEN
+CREATE TABLE "TDetalleOrden" (
+    "ConOrdenes" bigint NOT NULL,
+	"ConProductos" bigint NOT NULL
+	CONSTRAINT "FK_Detalle_Orden" FOREIGN KEY 
+	(
+		"ConOrdenes"
+	) REFERENCES "dbo"."TOrdenes" (
+		"ConOrdenes"
+	),
+	CONSTRAINT "FK_Detalle_Producto" FOREIGN KEY 
+	(
+		"ConProductos"
+	) REFERENCES "dbo"."TProductos" (
+		"ConProductos"
+	)
+)
 GO
 
 --Procedimientos Almacenados ---- 
 
 
-CREATE PROCEDURE [dbo].[IniciarSesionSP]
+CREATE OR ALTER PROCEDURE [dbo].[IniciarSesionSP]
 	@Correo         varchar(100),
     @Contrasenna    varchar(25)
 AS
@@ -196,9 +220,10 @@ BEGIN
 	  AND	Estado = 1
 
 END
+GO
 
 
-CREATE PROCEDURE [dbo].[RecuperarCuentaSP]
+CREATE OR ALTER PROCEDURE [dbo].[RecuperarCuentaSP]
 	@Cedula varchar(25)
 AS
 BEGIN
@@ -210,8 +235,9 @@ BEGIN
 	  WHERE Cedula = @Cedula
 
 END
+GO
 
-CREATE PROCEDURE [dbo].[RegistrarCuentaSP]
+CREATE OR ALTER PROCEDURE [dbo].[RegistrarCuentaSP]
 	@Cedula         varchar(25),
     @Nombre         varchar(250),
     @Correo         varchar(100),
@@ -221,9 +247,150 @@ BEGIN
 	INSERT INTO dbo.TUsuario (Cedula,Nombre,Correo,Contrasenna,Estado,ConProvincia,ConRol)
     VALUES (@Cedula,@Nombre,@Correo,@Contrasenna,1,8,2)
 END
+GO
+
+--Procedures Suplementos
+
+CREATE OR ALTER PROCEDURE [dbo].[InsertarProductos]
+	@Nombre         varchar(40),
+    @Proveedor       bigint,
+    @Categoria         bigint,
+    @Precio    money,
+	@TotalUnidades int
+AS
+BEGIN
+	INSERT INTO dbo.TProductos (NombreProducto,ConProovedores,ConCategoria,Precio,TotalUnidades)
+    VALUES (@Nombre,@Proveedor,@Categoria,@Precio,@TotalUnidades)
+END
+GO
+
+CREATE OR ALTER PROCEDURE [dbo].[ActualizarProductos]
+	@IdProducto         bigint,
+	@Nombre         varchar(40),
+    @Proveedor       bigint,
+    @Categoria         bigint,
+    @Precio    money,
+	@TotalUnidades int,
+	@Estado bit
+AS
+BEGIN
+	UPDATE dbo.TProductos 
+	SET NombreProducto = @Nombre, ConProovedores = @Proveedor, ConCategoria = @Categoria, Precio = @Precio, TotalUnidades = @TotalUnidades, Estado = @Estado
+	WHERE ConProductos = @IdProducto
+END
+GO
+
+CREATE OR ALTER PROCEDURE [dbo].[DesactivarProductos]
+	@IdProducto         bigint,
+	@Estado bit
+AS
+BEGIN
+	UPDATE dbo.TProductos 
+	SET Estado = @Estado
+	WHERE ConProductos = @IdProducto
+END
+GO
 
 
+CREATE OR ALTER PROCEDURE [dbo].[ListarProovedores]
 
+AS
+BEGIN
+	SELECT * FROM dbo.TProovedores WHERE Estado = 1
+END
+go
+
+CREATE  OR ALTER PROCEDURE [dbo].[ListarCategorias]
+AS
+BEGIN
+	SELECT * FROM dbo.TCategoria WHERE Estado = 1
+END
+go
+
+CREATE OR ALTER PROCEDURE [dbo].[ListarProductos]
+AS
+BEGIN
+	SELECT * FROM dbo.TProductos WHERE Estado = 1
+END
+go
+
+CREATE OR ALTER PROCEDURE [dbo].[InsertarProveedor]
+	@Nombre         varchar(40),
+    @Contacto      varchar(30),
+    @Direccion        varchar(60),
+    @Ciudad    varchar(15),
+	@Canton varchar(15),
+	@CodigoPostal varchar(10),
+	@Telefono varchar(24),
+	@Estado bit
+AS
+BEGIN
+	INSERT INTO dbo.TProovedores (NombreEmpresa,NombreContacto,Direccion,Ciudad,Canton,CodigoPostal,Telefono,Estado)
+    VALUES (@Nombre,@Contacto,@Direccion,@Ciudad,@Canton,@CodigoPostal,@Telefono,@Estado)
+END
+go
+
+CREATE OR ALTER PROCEDURE [dbo].[ActualizarProveedor]
+	@IdProveedor bigint,
+	@Nombre         varchar(40),
+    @Contacto      varchar(30),
+    @Direccion        varchar(60),
+    @Ciudad    varchar(15),
+	@Canton varchar(15),
+	@CodigoPostal varchar(10),
+	@Telefono varchar(24),
+	@Estado bit
+AS
+BEGIN
+	UPDATE dbo.TProovedores 
+    SET NombreEmpresa = @Nombre, NombreContacto = @Contacto, Direccion = @Direccion, Ciudad = @Ciudad, Canton = @Canton, CodigoPostal = @CodigoPostal, Telefono = @Telefono, Estado = @Estado
+	WHERE ConProovedores = @IdProveedor 
+END
+go
+
+CREATE OR ALTER PROCEDURE [dbo].[DesactivarProveedor]
+	@IdProveedor bigint,
+	@Estado bit
+AS
+BEGIN
+	UPDATE dbo.TProovedores 
+    SET Estado = @Estado
+	WHERE ConProovedores = @IdProveedor 
+END
+go
+
+CREATE OR ALTER PROCEDURE [dbo].[InsertarCategoria]
+    @Descripcion      varchar(50),
+	@Estado bit
+AS
+BEGIN
+	INSERT INTO dbo.TCategoria(Descripcion,Estado)
+    VALUES (@Descripcion,@Estado)
+END
+go
+
+CREATE OR ALTER PROCEDURE [dbo].[ActualizarCategoria]
+	@IdCategoria bigint,
+	@Descripcion      varchar(50),
+	@Estado bit
+AS
+BEGIN
+	UPDATE dbo.TCategoria 
+    SET Descripcion = @Descripcion, Estado = @Estado
+	WHERE ConCategoria = @IdCategoria 
+END
+go
+
+CREATE OR ALTER PROCEDURE [dbo].[DesactivarCategoria]
+	@IdCategoria bigint,
+	@Estado bit
+AS
+BEGIN
+	UPDATE dbo.TCategoria 
+    SET Estado = @Estado
+	WHERE ConCategoria = @IdCategoria 
+END
+go
 
 --INSERTS 
 --INSERTS 
@@ -231,12 +398,19 @@ END
 --INSERTS 
 --INSERTS 
 
-INSERT "TCategoria"("ConCategoria","Descripcion") VALUES(1, 'Proteinas')
+INSERT "TCategoria"("Descripcion","Estado") VALUES('Proteinas',1)
 
+INSERT INTO [dbo].[TRoles]
+           ([Descripcion])
+     VALUES
+           ('admin')
+go
 
-INSERT "TUsuario" VALUES('CVASQUEZ','Claudio Vasquez','200 Norte de Pequeño Mundo','Heredia','Flores','12209','88545268','1');
-INSERT "TUsuario" VALUES('CARIAS','Carlos Arias','50 este de Estadio Fello Mesa,','Cartado','El guarco','35465','88545268','2');
-
+INSERT INTO [dbo].[TRoles]
+           ([Descripcion])
+     VALUES
+           ('usuario')
+go
 
 --//TABLA PRODUCTOS 
 
@@ -258,35 +432,6 @@ INSERT [dbo].[TProvincia] ([ConProvincia], [Descripcion]) VALUES (8, N'Seleccion
 GO
 
 go
-set identity_insert "TCategoria" on
-set identity_insert "TCategoria" off
-
-drop table TCategoria
-
-
-INSERT INTO "ORDENES"
-("IDOrden","IDUsuario","DiaOrden","FechaEntrega","DireccionEnvio","CiudadEnvio","CantonEnvio","EnvioCodPostal")
-VALUES (10248,'CVASQUEZ',18/7/2023,20/7/2023,'Mall oxigeno Local #5','Heredia','Central','40545');
-
-
-INSERT "TProductos"("ConProductos","NombreProducto","IDProveedor","IDCategoria","CantidadPorUnidad","Precio","UnidadesEnStock","UnidadesEnOrden","Estado") VALUES(1,'Proteina',100,1,'21000','100','80','5','ACTIVO')
-
-
-set identity_insert "PRODUCTOS" on
-set identity_insert "PRODUCTOS" off
-
-
-
-INSERT "TProovedores"("ConProovedores","NombreEmpresa","NombreContacto","Direccion","Ciudad","Canton","CodigoPostal","Telefono") VALUES(1,'GNC','Carlos Castro','400 Oeste Iglesia Corazon','San Jose','Aserri','20548','55886654');
-
-go
-set identity_insert "PROVEEDORES" on
-set identity_insert "PROVEEDORES" off
-
-
-INSERT "DETALLEORDEN" VALUES(10248,1,'UPS',12500,5)
-
-
 
 
 

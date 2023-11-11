@@ -62,7 +62,7 @@ namespace WEBAPI.Controllers
                     return "OK";
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return string.Empty;
             }
