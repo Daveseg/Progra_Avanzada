@@ -259,6 +259,14 @@
     <Content Include="Views\Login\CerrarSesion.cshtml" />
     <Content Include="Views\Productos\Index.cshtml" />
     <Content Include="Views\Usuario\ConsultaUsuarios.cshtml" />
+    <Content Include="Views\Shared\_Layout_GeneralProductos.cshtml" />
+    <Content Include="Views\Productos\Shakers.cshtml" />
+    <Content Include="Views\Productos\Accesorios.cshtml" />
+    <Content Include="Views\Productos\SuplementosDeportivos.cshtml" />
+    <Content Include="Views\Productos\SuplementosAdultos.cshtml" />
+    <Content Include="Views\Productos\ProteinasPolvo.cshtml" />
+    <Content Include="Views\Productos\ProteinasSuero.cshtml" />
+    <Content Include="Views\Productos\ProteinasVegetal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
