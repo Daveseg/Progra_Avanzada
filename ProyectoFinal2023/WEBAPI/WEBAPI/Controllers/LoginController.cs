@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -13,9 +12,6 @@ namespace WEBAPI.Controllers
 {
     public class LoginController : ApiController
     {
-        Utilitarios util = new Utilitarios();
-
-
         [HttpPost]
         [Route("IniciarSesion")]
         public IniciarSesionSP_Result IniciarSesion(UsuarioEnt entidad)
@@ -62,44 +58,13 @@ namespace WEBAPI.Controllers
                     return "OK";
                 }
             }
-            catch (Exception ex)
-            {
-                return string.Empty;
-            }
-        }
-
-        [HttpGet]
-        [Route("RecuperarCuenta")]
-        public string RecuperarCuenta(string Cedula)
-        {
-            try
-            {
-                using (var context = new GYM_PROYECTOEntities())
-                {
-                    var datos = context.RecuperarCuentaSP(Cedula).FirstOrDefault();
-
-                    if (datos != null)
-                    {
-                        string rutaArchivo = AppDomain.CurrentDomain.BaseDirectory + "Templates\\Contrasenna.html";
-                        string html = File.ReadAllText(rutaArchivo);
-
-                        html = html.Replace("@@Nombre", datos.Nombre);
-                        html = html.Replace("@@Contrasenna", datos.Contrasenna);
-
-                        util.EnviarCorreo(datos.Correo, "Contraseña de Acceso", html);
-                        return "OK";
-                    }
-                    else
-                    {
-                        return string.Empty;
-                    }
-                }
-            }
             catch (Exception)
             {
                 return string.Empty;
             }
         }
+
+
 
 
 

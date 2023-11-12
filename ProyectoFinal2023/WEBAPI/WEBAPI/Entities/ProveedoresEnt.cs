@@ -6,7 +6,7 @@ using System.Web;
 
 namespace WEBAPI.Entities
 {
-    public class Proveedores
+    public class ProveedoresEnt
     {
         public long ConProveedores { get; set; }
         public string NombreEmpresa { get; set; }
@@ -16,6 +16,6 @@ namespace WEBAPI.Entities
         public string Canton {  get; set; }
         public string CodigoPostal { get; set; }
         public string Telefono { get; set; }
-        public long Estado { get; set; }
+        public bool Estado { get; set; }
     }
 }

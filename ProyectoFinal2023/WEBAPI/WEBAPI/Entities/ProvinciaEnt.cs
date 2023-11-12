@@ -5,9 +5,10 @@ using System.Web;
 
 namespace WEBAPI.Entities
 {
-    public class Roles
+    public class ProvinciaEnt
     {
-        public long ConRol {  get; set; }
+        public long ConProvincia { get; set; }
         public string Descripcion { get; set; }
+
     }
 }

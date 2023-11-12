@@ -11,8 +11,8 @@ namespace WEBAPI.Entities
         public string NombreProducto { get; set; }
         public long ConProveedores { get; set; }
         public long ConCategoria { get; set; }
-        public double Precio { get; set; }
+        public decimal Precio { get; set; }
         public int TotalUnidades { get; set; }
-        public int Estado {  get; set; }
+        public bool Estado {  get; set; }
     }
 }

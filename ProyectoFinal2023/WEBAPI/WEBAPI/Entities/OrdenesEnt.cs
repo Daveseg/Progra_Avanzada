@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WEBAPI.Entities
 {
-    public class Ordenes
+    public class OrdenesEnt
     {
         public long ConOrdenes { get; set; }
         public long ConUsuario { get; set; }
