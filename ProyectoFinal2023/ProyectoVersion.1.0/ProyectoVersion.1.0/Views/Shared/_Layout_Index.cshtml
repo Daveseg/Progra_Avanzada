@@ -10,12 +10,14 @@
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="~/Template/css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
 </head>
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
         <a class="navbar-brand ps-3" href="">Suplementicos</a>
-    
+
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
 
@@ -25,7 +27,7 @@
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <lr class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="@Url.Action("IniciarSesion","Login")">
-                        Iniciar Seccion 
+                        Iniciar Seccion
                     </a>
 
                     <a class="dropdown-item" href="@Url.Action("RegistrarCuenta","Login")">Registar Cuenta</a>
@@ -34,148 +36,187 @@
             </li>
         </ul>
     </nav>
-    @*// barra lateral*@ 
-<div id="layoutSidenav">
-    <div id="layoutSidenav_nav">
-        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-            <div class="sb-sidenav-menu">
-                <div class="nav">
+    @*// barra lateral*@
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
 
-                    <div class="sb-sidenav-menu-heading">
-                        Suplementicos Bienvenido
+                        <div class="sb-sidenav-menu-heading">
+                            Suplementicos Bienvenido
 
-                    </div>
-                    @*//SHAKERS AND ACCESORIOS *@
-                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                        SHAKERS Y ACCESORIOS
-                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                    </a>
-                    <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                        <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="layout-static.html">Shakers</a>
-                            <a class="nav-link" href="layout-sidenav-light.html">Accesorios</a>
-
-                        </nav>
-                    </div>
-                    @*//SUPLEMENTOS*@
-                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                        SUPLEMENTOS
-                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                    </a>
-                    <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                        <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="layout-static.html">Suplementos Deportivos</a>
-                            <a class="nav-link" href="layout-sidenav-light.html">Suplementos para Adultos Mayor</a>
-                        </nav>
-                    </div>
-
-                    @*//PRODUCTOS*@
-                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                        PRODUCTOS
-                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                    </a>
-                    <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                        <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="layout-static.html">Proteinas En Polvo</a>
-                            <a class="nav-link" href="layout-sidenav-light.html">Proteinas En Suero Leche</a>
-                            <a class="nav-link" href="layout-sidenav-light.html">Proteinas Vegetal</a>
-                        </nav>
-                    </div>
-
-                    @*//SOBRE NOSOTROS*@
-                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                        SOBRE NOSOTROS
-                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                    </a>
-                    <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                        <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="layout-static.html">Sobre Suplementicos</a>
-
-                        </nav>
-                    </div>
-
-                </div>
-            </div>
-            <div class="sb-sidenav-footer">
-                <div class="small">Bienvenidos a Suplementicos:</div>
-            </div>
-        </nav>
-    </div>
-    @*//fin BARRA LATERAL*@
-
-    <div id="layoutSidenav_content">
-        <main>
-            <div class="container-fluid px-4">
-
-
-                @RenderBody()
-
-                <h1 class="mt-4">Bienvenidos a Suplementicos</h1>
-                <ol class="breadcrumb mb-4">
-                    <a><img src="~/imagenes/suplementos01.jpg" width="1600" height="350" /></a>
-                </ol>
-
-                <div class="row">
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card bg-danger text-white mb-4">
-                            <div class="card-body">PROTEINAS</div>
-                            <div class="card-footer d-flex align-items-center justify-content-between">
-                                <img src="~/imagenes/proteina.jpg" width="100" height="100" />
-                                <a class="small text-white stretched-link" href="
-                           #">MAS INFO</a>
-                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                            </div>
                         </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card bg-danger text-white mb-4">
-                            <div class="card-body">MULTIVITAMÍNICOS</div>
-                            <div class="card-footer d-flex align-items-center justify-content-between">
-                                <img src="~/imagenes/Multivitaminicos.jpg" width="100" height="100" />
-                                <a class="small text-white stretched-link" href="#">MAS INFO</a>
-                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                            </div>
+                        @*//SHAKERS AND ACCESORIOS *@
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            SHAKERS Y ACCESORIOS
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="layout-static.html">Shakers</a>
+                                <a class="nav-link" href="layout-sidenav-light.html">Accesorios</a>
+
+                            </nav>
                         </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card bg-danger text-white mb-4">
-                            <div class="card-body">SUPLEMENTACIÓN DEPORTIVA</div>
-                            <div class="card-footer d-flex align-items-center justify-content-between">
-                                <img src="~/imagenes/prote3.jpg" width="100" height="100" />
-                                <a class="small text-white stretched-link" href="#">MAS INFO</a>
-                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                            </div>
+                        @*//SUPLEMENTOS*@
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            SUPLEMENTOS
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="layout-static.html">Suplementos Deportivos</a>
+                                <a class="nav-link" href="layout-sidenav-light.html">Suplementos para Adultos Mayor</a>
+                            </nav>
                         </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card bg-danger text-white mb-4">
-                            <div class="card-body">CBD</div>
-                            <div class="card-footer d-flex align-items-center justify-content-between">
-                                <img src="~/imagenes/Proteina2.jpg" width="100" height="100" />
-                                <a class="small text-white stretched-link" href="#">MAS INFO</a>
-                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                            </div>
+
+                        @*//PRODUCTOS*@
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            PRODUCTOS
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="layout-static.html">Proteinas En Polvo</a>
+                                <a class="nav-link" href="layout-sidenav-light.html">Proteinas En Suero Leche</a>
+                                <a class="nav-link" href="layout-sidenav-light.html">Proteinas Vegetal</a>
+                            </nav>
                         </div>
+
+                        @*//SOBRE NOSOTROS*@
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            SOBRE NOSOTROS
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="layout-static.html">Sobre Suplementicos</a>
+
+                            </nav>
+                        </div>
+
                     </div>
                 </div>
-            </div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Bienvenidos a Suplementicos:</div>
+                </div>
+            </nav>
+        </div>
+        @*//fin BARRA LATERAL*@
 
-        </main>
-        <br />
-        <br />
-        @*FOOTER*@
-        <footer class="footer">
-            <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © @DateTime.Now.Year.  Derechos Reservados.</span>
-            </div>
-        </footer>
-        @*FOOTER*@
+
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+
+
+                    @RenderBody()
+
+                    <h1 class="mt-4">Bienvenidos a Suplementicos</h1>
+                    <ol class="breadcrumb mb-4">
+                        <a>
+                            <img src="~/imagenes/suplementos01.jpg" />
+
+                            <style>
+                                /* Establece un estilo básico para la imagen */
+                                img {
+                                    max-width: 100%;
+                                    height: auto;
+                                    display: block; /* Evita márgenes añadidos por algunos navegadores */
+                                }
+
+                                /*  Añade estilos adicionales según sea necesario */
+                                a {
+                                    display: block; /* Asegura que el enlace ocupe todo el ancho disponible */
+                                }
+                            </style>
+                        </a>
+                    </ol>
+                    <style>
+                        .card {
+                            height: 100%;
+                        }
+
+                            .card img {
+                                max-width: 100%;
+                                height: auto;
+                            }
+                        
+
+                        .card-title {
+                            font-size: 1.3rem; /* Ajusta el tamaño de la fuente según las necesidades */
+                            text-align:center;
+                        }
+                    </style>
+                    <div class="row">
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-danger text-white mb-4 d-flex flex-column">
+                                <div class="card-body">
+                                    <h5 class="card-title">PROTEINAS</h5>
+                                </div>
+                                <div class="card-footer d-flex align-items-center justify-content-between">
+                                    <img src="~/imagenes/proteina.jpg" alt="Proteinas" width="100" height="100" />
+                                    <a class="small text-white stretched-link" href="#">MAS INFO</a>
+                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-danger text-white mb-4 d-flex flex-column">
+                                <div class="card-body">
+                                    <h5 class="card-title">MULTIVITAMÍNICOS</h5>
+                                </div>
+                                <div class="card-footer d-flex align-items-center justify-content-between">
+                                    <img src="~/imagenes/Multivitaminicos.jpg" alt="Multivitaminicos" width="100" height="100" />
+                                    <a class="small text-white stretched-link" href="#">MAS INFO</a>
+                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-danger text-white mb-4 d-flex flex-column">
+                                <div class="card-body">
+                                    <h5 class="card-title">SUPLEMENTACIÓN DEPORTIVA</h5>
+                                </div>
+                                <div class="card-footer d-flex align-items-center justify-content-between">
+                                    <img src="~/imagenes/prote3.jpg" alt="Suplementación Deportiva" width="100" height="100" />
+                                    <a class="small text-white stretched-link" href="#">MAS INFO</a>
+                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-danger text-white mb-4 d-flex flex-column">
+                                <div class="card-body">
+                                    <h5 class="card-title">CBD</h5>
+                                </div>
+                                <div class="card-footer d-flex align-items-center justify-content-between">
+                                    <img src="~/imagenes/Proteina2.jpg" alt="CBD" width="100" height="100" />
+                                    <a class="small text-white stretched-link" href="#">MAS INFO</a>
+                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+            <br />
+            <br />
+            @*FOOTER*@
+            <footer class="footer">
+                <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                    <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © @DateTime.Now.Year.  Derechos Reservados.</span>
+                </div>
+            </footer>
+            @*FOOTER*@
+        </div>
     </div>
-</div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="~/Template/js/scripts.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
@@ -183,6 +224,8 @@
     <script src="~/Template/assets/demo/chart-bar-demo.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
     <script src="~/Template/js/datatables-simple-demo.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
 
