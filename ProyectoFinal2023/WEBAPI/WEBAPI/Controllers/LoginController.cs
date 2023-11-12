@@ -70,6 +70,7 @@ namespace WEBAPI.Controllers
 
         [HttpGet]
         [Route("RecuperarCuenta")]
+
         public string RecuperarCuenta(string Cedula)
         {
             try
