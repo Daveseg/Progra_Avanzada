@@ -25,7 +25,7 @@
                 @using (Html.BeginForm("RecuperarCuenta", "Login", FormMethod.Post, new { @class = "pt-3" }))
                 {
                     <div class="form-group">
-                        @Html.TextBoxFor(m => m.Correo, new { @class = "form-control form-control-lg", @placeholder = "Correo Electrónico", @type = "email" })
+                        @Html.TextBoxFor(m => m.Cedula, new { @class = "form-control form-control-lg", @placeholder = "Cedula", @type = "text" })
                     </div>
                     <br />
                     <div class="mt-3">
